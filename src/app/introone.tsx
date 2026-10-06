@@ -40,7 +40,7 @@ const introone = () => {
       <View style={{ width: "60%" }}>
         <Text
           style={{
-            fontSize: 25,
+            fontSize: 20,
             fontWeight: "bold",
             color: colors.textPrimary,
           }}
@@ -72,7 +72,7 @@ const introone = () => {
         <GradientButton
           title="Next"
           onPress={() => {
-            router.push("/introThree");
+            router.push("/introTwo");
           }}
         />
       </View>
