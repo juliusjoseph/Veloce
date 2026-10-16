@@ -6,7 +6,7 @@ import { Link, useRouter } from "expo-router";
 import React from "react";
 import { Text, View } from "react-native";
 
-const introone = () => {
+const introTwo = () => {
   const router = useRouter();
   return (
     <Screen>
@@ -18,7 +18,7 @@ const introone = () => {
           marginTop: 20,
         }}
       >
-        <Text style={{ color: colors.primaryDark }}>Discover</Text>
+        <Text style={{ color: colors.primaryDark }}>Compare</Text>
         <Link href={"/"} style={{ color: colors.textSecondary }}>
           Skip
         </Link>
@@ -32,7 +32,7 @@ const introone = () => {
         }}
       >
         <AppImage
-          source={require("../../assets/images/stage.png")}
+          source={require("../../../assets/images/gear.png")}
           height={"100%"}
         />
       </View>
@@ -45,7 +45,7 @@ const introone = () => {
             color: colors.textPrimary,
           }}
         >
-          Exceptional bikes, handpicked for you.
+          Know every detail before you ride.
         </Text>
       </View>
       <View
@@ -64,15 +64,15 @@ const introone = () => {
             color: colors.textSecondary,
           }}
         >
-          Explore road, gravel and electric machines from the world’s most
-          respected makers.
+          Compare geometry, components and rider fit side by side—without the
+          technical overload.
         </Text>
       </View>
-      <View style={{ marginTop: "25%" }}>
+      <View style={{ marginTop: "30%" }}>
         <GradientButton
           title="Next"
           onPress={() => {
-            router.push("/introTwo");
+            router.push("/(onboarding)/intro_three");
           }}
         />
       </View>
@@ -80,4 +80,4 @@ const introone = () => {
   );
 };
 
-export default introone;
+export default introTwo;

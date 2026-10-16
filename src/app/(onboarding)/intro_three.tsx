@@ -5,6 +5,7 @@ import Screen from "@/components/Screen";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Text, View } from "react-native";
+import Vector from "../../../assets/icons/Vector.svg";
 
 const introThree = () => {
   const router = useRouter();
@@ -29,7 +30,7 @@ const introThree = () => {
         }}
       >
         <AppImage
-          source={require("../../assets/images/repair.png")}
+          source={require("../../../assets/images/repair.png")}
           height={"100%"}
         />
       </View>
@@ -67,9 +68,10 @@ const introThree = () => {
       </View>
       <View style={{ marginTop: "25%" }}>
         <GradientButton
-          title="Next"
+          title="Start Exploring"
+          icon={<Vector />}
           onPress={() => {
-            router.push("/");
+            router.push("/(Auth)/sign_in");
           }}
         />
       </View>

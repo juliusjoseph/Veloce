@@ -24,8 +24,8 @@ export default function Index() {
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={{
-            width: 55,
-            height: 55,
+            width: 45,
+            height: 45,
             justifyContent: "center",
             alignItems: "center",
             borderRadius: 10,
@@ -103,7 +103,7 @@ export default function Index() {
 
         <TouchableOpacity
           onPress={() => {
-            router.push("/introone");
+            router.push("/(onboarding)/intro_one");
           }}
           style={{
             backgroundColor: "#262C36",

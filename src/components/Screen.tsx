@@ -75,5 +75,5 @@ export default function Screen({
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  content: { paddingHorizontal: 12 },
+  content: { paddingHorizontal: 12, paddingBottom: 20 },
 });
