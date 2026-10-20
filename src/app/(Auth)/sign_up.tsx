@@ -1,9 +1,9 @@
 import Bike from "@/assets/icons/bike.svg";
 import Google from "@/assets/icons/google.svg";
 import AppTextInput from "@/components/AppTextInput";
-import { colors, gradients } from "@/components/colors";
-import GradientButton from "@/components/GradientButton";
+import { gradients } from "@/components/colors";
 import Screen from "@/components/Screen";
+import { radius, spacing, typography, useTheme } from "@/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
+  Pressable,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -18,6 +19,7 @@ import {
 } from "react-native";
 
 const signUp = () => {
+  const theme = useTheme();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -32,7 +34,12 @@ const signUp = () => {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
     >
-      <Screen scroll={true}>
+      <Screen
+        scroll
+        style={{ paddingHorizontal: spacing.lg }}
+        backgroundColor={theme.background}
+        lightStatusBar={false}
+      >
         <View
           style={{
             width: "100%",
@@ -51,55 +58,55 @@ const signUp = () => {
               height: 45,
               justifyContent: "center",
               alignItems: "center",
-              borderRadius: 10,
+              borderRadius: radius.md,
             }}
           >
             <Bike />
           </LinearGradient>
-          <View style={{ marginLeft: 10 }}>
+          <View style={{ marginLeft: spacing.md }}>
             <Text
               style={{
-                fontSize: 18,
-                fontWeight: "bold",
-                color: colors.textPrimary,
+                ...typography.headline,
+                color: theme.textPrimary,
               }}
             >
               VELOCE
             </Text>
-            <Text style={{ fontSize: 14, color: colors.primaryDark }}>
+            <Text style={{ ...typography.footnote, color: theme.primary }}>
               Ride beyond
             </Text>
           </View>
         </View>
 
-        <View style={{ width: "100%", marginTop: 10 }}>
+        <View style={{ width: "100%", marginTop: spacing.xl }}>
           <Text
             style={{
-              fontSize: 20,
-              fontWeight: "bold",
-              color: colors.textPrimary,
+              ...typography.title,
+              color: theme.textPrimary,
             }}
           >
             Create your rider account.
           </Text>
           <Text
             style={{
-              fontSize: 15,
-              fontWeight: "bold",
-              color: colors.textSecondary,
-              paddingTop: 5,
+              ...typography.subhead,
+              color: theme.textSecondary,
+              paddingTop: spacing.sm,
             }}
           >
             Save favorites, compare builds and track every order.
           </Text>
         </View>
 
-        <View style={{ marginTop: 15 }}>
+        <View style={{ marginTop: spacing.xl }}>
           <AppTextInput
             label="Full Name"
             icon="person-outline"
             value={form.name}
             onChangeText={(t) => setForm({ ...form, name: t })}
+            autoComplete="name"
+            textContentType="name"
+            returnKeyType="next"
           />
 
           <AppTextInput
@@ -109,6 +116,9 @@ const signUp = () => {
             autoCapitalize="none"
             value={form.email}
             onChangeText={(t) => setForm({ ...form, email: t })}
+            autoComplete="email"
+            textContentType="emailAddress"
+            returnKeyType="next"
           />
 
           <AppTextInput
@@ -117,6 +127,9 @@ const signUp = () => {
             isPassword
             value={form.password}
             onChangeText={(t) => setForm({ ...form, password: t })}
+            autoComplete="new-password"
+            textContentType="newPassword"
+            returnKeyType="next"
           />
 
           <AppTextInput
@@ -130,6 +143,9 @@ const signUp = () => {
             }
             value={form.confirm}
             onChangeText={(t) => setForm({ ...form, confirm: t })}
+            autoComplete="new-password"
+            textContentType="newPassword"
+            returnKeyType="done"
           />
         </View>
 
@@ -139,29 +155,48 @@ const signUp = () => {
             onPress={() => setRemember(!remember)}
             activeOpacity={0.7}
           >
-            <View style={[styles.box, remember && styles.boxChecked]}>
+            <View
+              style={[
+                styles.box,
+                { borderColor: theme.separator, backgroundColor: theme.surface },
+                remember && {
+                  backgroundColor: theme.primary,
+                  borderColor: theme.primary,
+                },
+              ]}
+            >
               {remember && (
-                <Ionicons
-                  name="checkmark"
-                  size={16}
-                  color={colors.textPrimary}
-                />
+                <Ionicons name="checkmark" size={16} color="#FFFFFF" />
               )}
             </View>
           </TouchableOpacity>
-          <Text style={styles.label}>
+          <Text style={[styles.label, { color: theme.textSecondary }]}>
             {" "}
             I agree to the Terms & Privacy Policy
           </Text>
         </View>
 
-        <View style={{ marginTop: "5%" }}>
-          <GradientButton
-            title="Create account"
+        <View style={{ marginTop: spacing.xl }}>
+          <Pressable
+            accessibilityRole="button"
             onPress={() => {
               router.push("/(Auth)/sign_in");
             }}
-          />
+            style={({ pressed }) => [
+              styles.primaryButton,
+              pressed && styles.pressedButton,
+            ]}
+          >
+            <LinearGradient
+              colors={gradients.primary}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.primaryButtonContent}
+            >
+              <Text style={styles.primaryButtonText}>Create account</Text>
+              <Ionicons name="arrow-forward" size={20} color="#FFFFFF" />
+            </LinearGradient>
+          </Pressable>
         </View>
 
         <View
@@ -169,63 +204,77 @@ const signUp = () => {
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "space-evenly",
-            marginTop: 15,
+            marginTop: spacing.xl,
           }}
         >
           <View
             style={{
               width: "40%",
               height: 1,
-              backgroundColor: colors.surface,
-              marginTop: 5,
+              backgroundColor: theme.separator,
+              marginTop: spacing.xs,
             }}
           ></View>
-          <Text style={{ color: colors.textSecondary }}>OR</Text>
+          <Text style={{ ...typography.footnote, color: theme.textSecondary }}>
+            OR
+          </Text>
           <View
             style={{
               width: "40%",
               height: 1,
-              backgroundColor: colors.surface,
-              marginTop: 5,
+              backgroundColor: theme.separator,
+              marginTop: spacing.xs,
             }}
           ></View>
         </View>
 
         <TouchableOpacity
           style={{
-            backgroundColor: colors.whiteTint,
+            backgroundColor: theme.surface,
             minHeight: 50,
-            borderRadius: 14,
+            borderRadius: radius.md,
             paddingLeft: 24,
             paddingRight: 10,
             paddingVertical: 10,
             alignItems: "center",
             justifyContent: "center",
             borderWidth: 1,
-            borderColor: "#5A6A7C",
+            borderColor: theme.separator,
             flexDirection: "row",
-            marginTop: 15,
+            marginTop: spacing.xl,
           }}
         >
           <Google />
-          <Text style={{ color: colors.textPrimary, paddingLeft: 10 }}>
+          <Text
+            style={{
+              ...typography.callout,
+              color: theme.textPrimary,
+              paddingLeft: spacing.md,
+            }}
+          >
             Continue with Google
           </Text>
         </TouchableOpacity>
 
-        <View style={{ marginTop: 15, alignItems: "center", width: "100%" }}>
+        <View
+          style={{
+            marginTop: spacing.xl,
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
           <Text
             style={{
-              fontSize: 15,
-              color: colors.textSecondary,
+              ...typography.subhead,
+              color: theme.textSecondary,
             }}
           >
             Already have an account?{" "}
             <Text
               style={{
-                fontSize: 15,
+                ...typography.subhead,
                 fontWeight: "700",
-                color: colors.primaryDark,
+                color: theme.primary,
               }}
               onPress={() => router.push("/(Auth)/sign_in")}
             >
@@ -246,27 +295,40 @@ const styles = StyleSheet.create({
   checkRow: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 12,
+    gap: spacing.md,
+    minHeight: 48,
   },
   box: {
     width: 24,
     height: 24,
-    borderRadius: 7,
+    borderRadius: radius.sm,
     borderWidth: 1.5,
-    borderColor: colors.whiteTint,
-    backgroundColor: colors.surface,
+    borderColor: "transparent",
+    backgroundColor: "transparent",
     alignItems: "center",
     justifyContent: "center",
   },
-  boxChecked: {
-    backgroundColor: colors.primaryDark,
-    borderColor: colors.primaryDark,
-  },
   label: {
-    fontSize: 15,
-    color: colors.textSecondary,
-    paddingLeft: 15,
+    ...typography.subhead,
+    paddingLeft: spacing.md,
   },
+  primaryButton: {
+    height: 50,
+    borderRadius: radius.md,
+    overflow: "hidden",
+  },
+  primaryButtonContent: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: spacing.md,
+  },
+  primaryButtonText: {
+    ...typography.headline,
+    color: "#FFFFFF",
+  },
+  pressedButton: { opacity: 0.7 },
 });
 
 export default signUp;
