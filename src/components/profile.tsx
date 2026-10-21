@@ -153,7 +153,7 @@ const s = StyleSheet.create({
   profileRow: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 20,
+    paddingHorizontal: 5,
     marginTop: 8,
   },
   avatarRing: {
@@ -181,7 +181,7 @@ const s = StyleSheet.create({
   },
 
   member: {
-    marginHorizontal: 20,
+    marginHorizontal: 5,
     marginTop: 16,
     borderRadius: 24,
     padding: 18,
@@ -219,7 +219,7 @@ const s = StyleSheet.create({
   statsRow: {
     flexDirection: "row",
     gap: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 5,
     marginTop: 14,
   },
   stat: {
@@ -244,7 +244,7 @@ const s = StyleSheet.create({
     marginBottom: 10,
   },
   menu: {
-    marginHorizontal: 20,
+    marginHorizontal: 5,
     borderRadius: 24,
     backgroundColor: colors.surface,
     borderWidth: 1,
